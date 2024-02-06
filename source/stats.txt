@@ -1,0 +1,13 @@
+Strength
+Vigor
+Agility
+Dexterity
+Will
+Knowledge
+Resourcfulness
+Max Health
+Physical Power
+Magical Power
+Armor Rating
+Magic Resistance
+Move Speed
