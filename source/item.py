@@ -7,3 +7,6 @@ class Item(object):
 
     def __str__(self):
         return f"{self.name} - {self.character} - {self.type} - {self.stats}"
+    
+    def get_type(self):
+        return self.type
