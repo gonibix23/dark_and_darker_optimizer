@@ -16,6 +16,12 @@ class Character(object):
 
         self.max_health_bonus = 0
         self.additional_max_health = 0
+        self.magical_healing = 0
+
+        self.true_physical_damage = 0
+        self.true_magical_damage = 0
+        self.additional_physical_damage = 0
+        self.additional_magical_damage = 0
 
         self.magic_resist = 0
         self.armor = 0

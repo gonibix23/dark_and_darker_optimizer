@@ -4,7 +4,7 @@ from character import Rogue, Ranger
 from image_to_text import image_to_text
 from text_to_item import text_to_item
 
-def main():
+def test_items():
     items = []
     directorio = 'items/'
 
@@ -22,4 +22,4 @@ def test_character():
     print(test_character)
 
 if __name__ == "__main__":
-    test_character()
+    test_items()

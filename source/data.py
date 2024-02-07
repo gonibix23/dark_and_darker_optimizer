@@ -29,4 +29,10 @@ stat = {'Strength':'strength',
         'Armor Penetration':'armor_penetration',
         'Projectile Damage Reduction':'projectile_damage_reduction',
         'Headshot Damage Reduction':'headshot_damage_reduction',
-        'All Attributes':'all_attributes_bonus'}
+        'All Attributes':'all_attributes_bonus',
+        'Magical Healing':'magical_healing',
+        'True Physical Damage':'true_physical_damage',
+        'True Magical Damage':'true_magical_damage',
+        'Luck':'luck',
+        'Additional Physical Damage':'additional_physical_damage',
+        'Additional Magical Damage':'additional_magical_damage'}
