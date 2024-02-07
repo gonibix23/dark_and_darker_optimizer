@@ -7,7 +7,7 @@ from text_to_item import text_to_item
 
 def test_items():
     items = []
-    directorio = 'items/'
+    directorio = 'items_rymux/'
 
     # Iterar sobre todos los archivos en el directorio
     for nombre_archivo in os.listdir(directorio):
@@ -16,11 +16,20 @@ def test_items():
             items.append(text_to_item(image_to_text(ruta_archivo)))
 
     test_character = Ranger()
-
-    for item in items:
-        test_character.equip_item(item)
     
-    print(optimize_equipment(test_character, items))
+    weights = {
+        "physical_damage": 0,
+        "magical_damage": 5,
+        "health": 2,
+        "armor": 1,
+        "magic_resist": 1,
+        "speed": 4
+    }
+    #print(test_character.equipment_to_string())
+    best_items = optimize_equipment(test_character, items, weights)
+    for item in best_items:
+        print(item)
+        test_character.equip_item(item)
 
 
 def test_character():

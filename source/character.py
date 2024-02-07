@@ -55,7 +55,7 @@ class Character(object):
         self.magical_damage_reduction_bonus = 0
 
         # Equipment
-        self.equipment = {'Head': None, 'Chest': None, 'Legs': None, 'Hands': None, 'Feet': None, 'Primary Weapon': None, 'Necklace': None, 'Back': None, 'Ring': []}
+        self.equipment = {'Head': None, 'Chest': None, 'Legs': None, 'Hands': None, 'Foot': None, 'Primary Weapon': None, 'Necklace': None, 'Back': None, 'Ring': []}
 
         self.calculate_stats()
 
@@ -92,7 +92,7 @@ class Character(object):
         self.physical_damage_reduction = round(stats.physical_damage_reduction(self.armor)+(self.physical_damage_reduction_bonus/100), 4)
 
     def equip_item(self, item):
-        if item.get_type() == 'Ring':
+        if item.type == 'Ring':
             if len(self.equipment['Ring']) < 2:
                 self.equipment['Ring'].append(item)
             else:
@@ -171,6 +171,13 @@ class Character(object):
             "headshot_damage_reduction": self.headshot_damage_reduction,
             "projectile_damage_reduction": self.projectile_damage_reduction
         }
+
+    def equipment_to_string(self):
+        equipment = ""
+        for item in self.equipment:
+            if item:
+                equipment += f"{item} - {self.equipment[item]}\n"
+        return equipment
 
 
 class Wizard(Character):
