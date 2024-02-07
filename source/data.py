@@ -1,5 +1,5 @@
 character = ['Fighter', 'Cleric', 'Wizard', 'Warlock', 'Bard', 'Ranger', 'Barbarian', 'Rogue', 'Druid']
-type = ['Chest', 'Legs', 'Foot', 'Hands', 'Primary Weapon', 'Necklace', 'Back', 'Head', 'Ring']
+type = {'Chest':1, 'Legs':1, 'Foot':1, 'Hands':1, 'Primary Weapon':1, 'Necklace':1, 'Back':1, 'Head':1, 'Ring':2}
 stat = {'Strength':'strength',
         'Vigor':'vigor',
         'Agility':'agility',
@@ -35,4 +35,5 @@ stat = {'Strength':'strength',
         'True Magical Damage':'true_magical_damage',
         'Luck':'luck',
         'Additional Physical Damage':'additional_physical_damage',
-        'Additional Magical Damage':'additional_magical_damage'}
+        'Additional Magical Damage':'additional_magical_damage',
+        'Weapon Damage':'weapon_damage'}

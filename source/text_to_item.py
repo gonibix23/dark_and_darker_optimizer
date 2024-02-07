@@ -16,20 +16,18 @@ def text_to_item(text):
 
     item["stats"] = {}
 
-    for stat in data.stat:
+    for stat in data.stat.values():
         item["stats"][stat] = 0
 
-    '''
     for stat in text[1:]:
         text, number = separate_text_and_number(stat)
-        if text != "Empty" and text[0].isupper(): # and text in data.stat
+        if text != "Empty" and text[0].isupper() and text in data.stat:
             # Check if the stat is in the list of stats
-            if text in item["stats"]:
+            if data.stat[text] in item["stats"]:
                 # If the stat is already in the list, add the number to the existing value
-                item["stats"][text] += number
+                item["stats"][data.stat[text]] += number
             else:
                 # If the stat is not in the list, add it with the number
-                item["stats"][text] = number
-    '''
+                item["stats"][data.stat[text]] = number
     
     return Item(item['class'], item['type'], item['name'], item['stats'])

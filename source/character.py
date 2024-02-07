@@ -2,6 +2,7 @@ import stats
 
 class Character(object):
     def __init__(self, strength, vigor, agility, dexterity, will, knowledge, resourcfulness):
+        # Primary Stats
         self.strength = strength
         self.vigor = vigor
         self.agility = agility
@@ -10,6 +11,7 @@ class Character(object):
         self.knowledge = knowledge
         self.resourcfulness = resourcfulness
 
+        # Secondary Stats
         self.luck = 0
 
         self.all_atributes_bonus = 0
@@ -18,6 +20,7 @@ class Character(object):
         self.additional_max_health = 0
         self.magical_healing = 0
 
+        self.weapon_damage = 0
         self.true_physical_damage = 0
         self.true_magical_damage = 0
         self.additional_physical_damage = 0
@@ -49,6 +52,17 @@ class Character(object):
         self.projectile_damage_reduction = 0
         self.physical_damage_reduction_bonus = 0
         self.magical_damage_reduction_bonus = 0
+
+        # Equipment
+        self.head = None
+        self.chest = None
+        self.legs = None
+        self.hands = None
+        self.feet = None
+        self.primary_weapon = None
+        self.necklace = None
+        self.back = None
+        self.ring = []
 
         self.calculate_stats()
 
@@ -83,6 +97,45 @@ class Character(object):
 
         self.magical_damage_reduction = stats.magical_damage_reduction(self.magic_resist)+self.magical_damage_reduction_bonus
         self.physical_damage_reduction = stats.physical_damage_reduction(self.armor)+self.physical_damage_reduction_bonus
+
+    def equip_item(self, item):
+        if item.type == 'Head':
+            self.unequip_item(self.head)
+            self.head = item
+        elif item.type == 'Chest':
+            self.unequip_item(self.chest)
+            self.chest = item
+        elif item.type == 'Legs':
+            self.unequip_item(self.legs)
+            self.legs = item
+        elif item.type == 'Hands':
+            self.unequip_item(self.hands)
+            self.hands = item
+        elif item.type == 'Feet':
+            self.unequip_item(self.feet)
+            self.feet = item
+        elif item.type == 'Primary Weapon':
+            self.unequip_item(self.primary_weapon)
+            self.primary_weapon = item
+        elif item.type == 'Necklace':
+            self.unequip_item(self.necklace)
+            self.necklace = item
+        elif item.type == 'Back':
+            self.unequip_item(self.back)
+            self.back = item
+        elif item.type == 'Ring' and len(self.ring) < 2:
+            self.ring.append(item)
+        elif item.type == 'Ring' and len(self.ring) == 2:
+            self.unequip_item(self.ring.pop(0))
+            self.ring.append(item)
+
+        for stat in item.stats:
+            setattr(self, stat, getattr(self, stat) + item.stats[stat])
+
+    def unequip_item(self, item):
+        if item:
+            for stat in item.stats:
+                setattr(self, stat, getattr(self, stat) - item.stats[stat])
 
 
 class Wizard(Character):
