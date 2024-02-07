@@ -92,9 +92,6 @@ def optimize_equipment(character, items, weights):
             cp.sum([x[i] for i in range(len(items)) if items[i].type == item_type]) == data.type[item_type]
         )
 
-    for cons in constraints:
-        print(cons)
-
     # Create the objective function
     objective = cp.Maximize(
         sum(

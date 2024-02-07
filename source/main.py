@@ -1,22 +1,19 @@
-import os
+import streamlit as st
+import time
+from PIL import Image
 
-from optimizer import optimize_equipment
-from character import Rogue, Ranger
-from image_to_text import image_to_text
-from text_to_item import text_to_item
+from source.optimizer import optimize_equipment
+from source.characters import create_character
+from source.image_to_item import image_to_item
+import data
 
-def test_items():
+def main():
     items = []
-    directorio = 'items_rymux/'
+    character = None
+    best_items = None
+    uploaded_images = None
 
-    # Iterar sobre todos los archivos en el directorio
-    for nombre_archivo in os.listdir(directorio):
-        ruta_archivo = os.path.join(directorio, nombre_archivo)
-        if os.path.isfile(ruta_archivo):
-            items.append(text_to_item(image_to_text(ruta_archivo)))
-
-    test_character = Ranger()
-    
+    # Diccionario de pesos
     weights = {
         "physical_damage": 0,
         "magical_damage": 5,
@@ -25,16 +22,37 @@ def test_items():
         "magic_resist": 1,
         "speed": 4
     }
-    #print(test_character.equipment_to_string())
-    best_items = optimize_equipment(test_character, items, weights)
-    for item in best_items:
-        print(item)
-        test_character.equip_item(item)
 
+    st.set_page_config(layout="wide")
+    st.title("Dark and Darker Optimizer")
+    st.header("Welcome to the Dark and Darker optimizer!")
 
-def test_character():
-    test_character = Ranger()
-    print(test_character)
+    # Widget selectbox para seleccionar el personaje
+    character = st.selectbox("Select a character:", data.character)
 
-if __name__ == "__main__":
-    test_items()
+    # Widget file_uploader para cargar imágenes
+    uploaded_images = st.file_uploader('Upload an image:', type=['jpg', 'png', 'jpeg'], accept_multiple_files=True)
+
+    # Muestra la imagen cargada
+    if uploaded_images is not None:
+        for uploaded_image in uploaded_images:
+            item = image_to_item(Image.open(uploaded_image))
+            items.append(item)
+
+    # Widget sliders para ajustar los pesos
+    for category, default_value in weights.items():
+        weights[category] = st.slider(f"{category.capitalize()} Weight", 0, 10, default_value)
+
+    # Widget button para ejecutar la función
+    if st.button("Optimize"):
+        best_items = optimize_equipment(create_character(character), items, weights)
+        
+    if best_items is not None:
+        st.header("Best items for the character:")
+        # Display the images in a 2x5 grid
+        col = st.columns(5)
+        for i, item in enumerate(best_items):
+            col[i % 5].image(item.image, caption=item, use_column_width=True)
+
+if __name__ == '__main__':
+    main()

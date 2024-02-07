@@ -1,9 +1,10 @@
 class Item(object):
-    def __init__(self, character, type, name, stats):
+    def __init__(self, character, type, name, stats, image):
         self.name = name
         self.character = character
         self.type = type
         self.stats = stats
+        self.image = image
 
     def __str__(self):
         string = self.name + '\n'

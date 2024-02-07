@@ -1,5 +1,4 @@
 import stats
-from item import Item
 
 class Character(object):
     def __init__(self, strength, vigor, agility, dexterity, will, knowledge, resourcfulness):
@@ -287,3 +286,23 @@ class Druid(Character):
             knowledge = 20,
             resourcfulness = 15
         )
+
+def create_character(selected_class):
+    if selected_class == "Wizard":
+        return Wizard()
+    elif selected_class == "Fighter":
+        return Fighter()
+    elif selected_class == "Cleric":
+        return Cleric()
+    elif selected_class == "Warlock":
+        return Warlock()
+    elif selected_class == "Bard":
+        return Bard()
+    elif selected_class == "Ranger":
+        return Ranger()
+    elif selected_class == "Barbarian":
+        return Barbarian()
+    elif selected_class == "Rogue":
+        return Rogue()
+    elif selected_class == "Druid":
+        return Druid()
