@@ -21,6 +21,7 @@ class Character(object):
         self.magical_healing = 0
 
         self.weapon_damage = 0
+        self.magical_damage = 0
         self.true_physical_damage = 0
         self.true_magical_damage = 0
         self.additional_physical_damage = 0

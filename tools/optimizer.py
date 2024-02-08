@@ -25,6 +25,7 @@ def calculate_magical_damage_metric(character, item):
         item.stats["will"]+item.stats["all_attributes_bonus"]+
         item.stats["additional_magical_damage"]+
         2*item.stats["true_magical_damage"]+
+        item.stats["magical_damage"]+
         item.stats["magical_power"]+
         item.stats["magical_damage_bonus"]+
         0.5*item.stats["magic_penetration"]+
@@ -100,12 +101,12 @@ def optimize_equipment(character, items, weights):
     # Create the objective function
     objective = cp.Maximize(
         sum(
-            weights["physical_damage"]*calculate_physical_damage_metric(character, items[i])*x[i] +
-            weights["magical_damage"]*calculate_magical_damage_metric(character, items[i])*x[i] +
-            weights["health"]*calculate_health_metric(character, items[i])*x[i] +
-            weights["armor"]*calculate_armor_metric(character, items[i])*x[i] +
-            weights["magic_resist"]*calculate_magic_resist_metric(character, items[i])*x[i] +
-            weights["speed"]*calculate_move_speed_metric(character, items[i])*x[i]
+            weights["physical_damage"][0]*calculate_physical_damage_metric(character, items[i])*x[i] +
+            weights["magical_damage"][0]*calculate_magical_damage_metric(character, items[i])*x[i] +
+            weights["health"][0]*calculate_health_metric(character, items[i])*x[i] +
+            weights["armor"][0]*calculate_armor_metric(character, items[i])*x[i] +
+            weights["magic_resist"][0]*calculate_magic_resist_metric(character, items[i])*x[i] +
+            weights["speed"][0]*calculate_move_speed_metric(character, items[i])*x[i]
             for i in range(len(items))
         )
     )

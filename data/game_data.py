@@ -36,4 +36,5 @@ stat = {"Strength":"strength",
         "Luck":"luck",
         "Additional Physical Damage":"additional_physical_damage",
         "Additional Magical Damage":"additional_magical_damage",
-        "Weapon Damage":"weapon_damage"}
+        "Weapon Damage":"weapon_damage",
+        "Magical Damage":"magical_damage"}
