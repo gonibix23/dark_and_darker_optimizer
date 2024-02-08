@@ -8,7 +8,7 @@ You need to install Tesseract-ORC for the text detection in images.
 
 ## Usage
 
-First you need to take screenshot of all items (must be taken like example)
+First you need to take screenshots of all items (must be taken like the example below)
 
 ![item0](https://github.com/gonibix23/dark_and_darker_optimizer/assets/47611628/d9ba7d9d-2e67-47be-aa2a-4210d28d0143)
 
