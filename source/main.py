@@ -31,7 +31,7 @@ def main():
     character = create_character(st.selectbox("Select a character:", data.character))
 
     # Widget file_uploader para cargar imágenes
-    uploaded_images = st.file_uploader('Upload an image:', type=['jpg', 'png', 'jpeg'], accept_multiple_files=True)
+    uploaded_images = st.file_uploader("Upload an image:", type=["jpg", "png", "jpeg"], accept_multiple_files=True)
 
     # Muestra la imagen cargada
     if uploaded_images is not None:
@@ -66,5 +66,5 @@ def main():
     
     st.write("Made with ❤️ for Dark and Darker Community by gonibix23")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

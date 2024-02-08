@@ -54,7 +54,7 @@ class Character(object):
         self.magical_damage_reduction_bonus = 0
 
         # Equipment
-        self.equipment = {'Head': None, 'Chest': None, 'Legs': None, 'Hands': None, 'Foot': None, 'Primary Weapon': None, 'Necklace': None, 'Back': None, 'Ring': []}
+        self.equipment = {"Head": None, "Chest": None, "Legs": None, "Hands": None, "Foot": None, "Primary Weapon": None, "Necklace": None, "Back": None, "Ring": []}
 
         self.calculate_stats()
 
@@ -90,13 +90,14 @@ class Character(object):
         self.magical_damage_reduction = round(stats.magical_damage_reduction(self.magic_resist)+(self.magical_damage_reduction_bonus/100), 4)
         self.physical_damage_reduction = round(stats.physical_damage_reduction(self.armor)+(self.physical_damage_reduction_bonus/100), 4)
 
+
     def equip_item(self, item):
-        if item.type == 'Ring':
-            if len(self.equipment['Ring']) < 2:
-                self.equipment['Ring'].append(item)
+        if item.type == "Ring":
+            if len(self.equipment["Ring"]) < 2:
+                self.equipment["Ring"].append(item)
             else:
-                self.unequip_item(self.equipment['Ring'].pop(0))
-                self.equipment['Ring'].append(item)
+                self.unequip_item(self.equipment["Ring"].pop(0))
+                self.equipment["Ring"].append(item)
         else:
             self.unequip_item(self.equipment[item.type])
             self.equipment[item.type] = item
@@ -118,7 +119,7 @@ class Character(object):
             "Agility": self.agility,
             "Dexterity": self.dexterity,
             "Will": self.will,
-            "Knowledge": self.knowledge,
+            "Knowledge": round(self.knowledge*1.1, 1),
             "Resourcfulness": self.resourcfulness,
             "Luck": self.luck,
             "Max Health": self.max_health,
@@ -141,8 +142,8 @@ class Character(object):
             "Buff Duration": f"{round(self.buff_duration*100, 2)}%",
             "Debuff Duration": f"{round(self.debuff_duration*100, 2)}%",
             "persuasiveness": self.persuasiveness,
-            "Magical Interaction Speed": f"{self.magical_interaction_speed*100}%",
-            "Regular Interaction Speed": f"{self.regular_interaction_speed*100}%",
+            "Magical Interaction Speed": f"{round(self.magical_interaction_speed*100, 2)}%",
+            "Regular Interaction Speed": f"{round(self.regular_interaction_speed, 2)}%",
             "Magical Healing": self.magical_healing,
             "True Physical Damage": self.true_physical_damage,
             "True Magical Damage": self.true_magical_damage,

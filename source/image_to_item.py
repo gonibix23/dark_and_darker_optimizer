@@ -3,11 +3,11 @@ import pytesseract
 import data
 from item import Item
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def image_to_item(image):
     text = pytesseract.image_to_string(image)
-    text = re.sub('[^A-Za-z0-9|\\n|\.|\,|-]+', ' ', text)
+    text = re.sub("[^A-Za-z0-9|\\n|\.|\,|-]+", " ", text)
 
     item = {
         "class": [word for word in data.character if word in text],
@@ -17,7 +17,7 @@ def image_to_item(image):
     if item["class"] == []:
         item["class"].append("All")
 
-    text = text.split('\n')
+    text = text.split("\n")
     text = [x.strip() for x in text]
     text = list(filter(None, text))
     item["name"] = text[0]
@@ -38,11 +38,11 @@ def image_to_item(image):
                 # If the stat is not in the list, add it with the number
                 item["stats"][data.stat[text]] = number
     
-    return Item(item['class'], item['type'], item['name'], item['stats'], image)
+    return Item(item["class"], item["type"], item["name"], item["stats"], image)
 
 def separate_text_and_number(string):
     # Define a regular expression pattern to find text and numbers in the string
-    pattern = re.compile(r'([a-zA-Z\s]+)([+-]?\d*\.?\d+)')
+    pattern = re.compile(r"([a-zA-Z\s]+)([+-]?\d*\.?\d+)")
 
     # Search for matches in the string
     matches = pattern.match(string)
@@ -54,7 +54,7 @@ def separate_text_and_number(string):
         return text, number
     else:
         # Define a regular expression pattern to find text and numbers in the string
-        pattern = re.compile(r'([+-]?\d*\.?\d+)([a-zA-Z\s]+)')
+        pattern = re.compile(r"([+-]?\d*\.?\d+)([a-zA-Z\s]+)")
 
         # Search for matches in the string
         matches = pattern.match(string)
