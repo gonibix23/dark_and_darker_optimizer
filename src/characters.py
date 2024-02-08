@@ -1,4 +1,4 @@
-import stats
+import data.stats as stats
 
 class Character(object):
     def __init__(self, strength, vigor, agility, dexterity, will, knowledge, resourcfulness):

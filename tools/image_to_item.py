@@ -1,7 +1,7 @@
 import re
 import pytesseract
-import data
-from item import Item
+import data.game_data as data
+from src.item import Item
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 

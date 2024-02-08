@@ -1,11 +1,10 @@
 import streamlit as st
-import time
 from PIL import Image
 
-from source.optimizer import optimize_equipment
-from source.characters import create_character
-from source.image_to_item import image_to_item
-import data
+from tools.optimizer import optimize_equipment
+from src.characters import create_character
+from tools.image_to_item import image_to_item
+import data.game_data as data
 
 def main():
     items = []

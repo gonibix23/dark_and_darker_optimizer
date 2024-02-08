@@ -1,6 +1,6 @@
 import cvxpy as cp
-import data
-import stats
+import data.stats as stats
+import data.game_data as data
 
 def calculate_physical_damage_metric(character, item):
     # Create the damage metric
@@ -81,6 +81,11 @@ def calculate_move_speed_metric(character, item):
     return move_speed_metric
 
 def optimize_equipment(character, items, weights):
+    # Remove items that the character cannot equip
+    for item in items:
+        if type(character).__name__ not in item.character and "All" not in item.character:
+            items.remove(item)
+
     # Create the optimization variables
     x = cp.Variable(len(items), boolean=True)
 
