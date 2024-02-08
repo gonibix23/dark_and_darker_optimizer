@@ -12,14 +12,14 @@ def main():
     best_items = None
     uploaded_images = None
 
-    # Diccionario de pesos
+    # Weights for the optimization
     weights = {
-        "physical_damage": 0,
-        "magical_damage": 5,
-        "health": 2,
+        "physical_damage": 1,
+        "magical_damage": 1,
+        "health": 1,
         "armor": 1,
         "magic_resist": 1,
-        "speed": 4
+        "speed": 1
     }
 
     st.set_page_config(layout="wide")

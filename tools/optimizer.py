@@ -3,7 +3,7 @@ import data.stats as stats
 import data.game_data as data
 
 def calculate_physical_damage_metric(character, item):
-    # Create the damage metric
+    # Create the physical damage metric
     damage_metric = (
         item.stats["strength"]+item.stats["all_attributes_bonus"]+
         item.stats["additional_physical_damage"]+
@@ -20,7 +20,7 @@ def calculate_physical_damage_metric(character, item):
     return damage_metric
 
 def calculate_magical_damage_metric(character, item):
-    # Create the damage metric
+    # Create the magical damage metric
     damage_metric = (
         item.stats["will"]+item.stats["all_attributes_bonus"]+
         item.stats["additional_magical_damage"]+
@@ -35,7 +35,7 @@ def calculate_magical_damage_metric(character, item):
     return damage_metric
 
 def calculate_health_metric(character, item):
-    # Create the damage metric
+    # Create the health metric
     health_metric = (
         0.75*(item.stats["vigor"]+item.stats["all_attributes_bonus"])+
         0.25*(item.stats["strength"]+item.stats["all_attributes_bonus"])+
@@ -48,7 +48,7 @@ def calculate_health_metric(character, item):
     return health_metric
 
 def calculate_armor_metric(character, item):
-    # Create the damage metric
+    # Create the armor metric
     armor_metric = (
         item.stats["armor"]/10+
         item.stats["physical_damage_reduction_bonus"]+
@@ -60,7 +60,7 @@ def calculate_armor_metric(character, item):
     return armor_metric
 
 def calculate_magic_resist_metric(character, item):
-    # Create the damage metric
+    # Create the magic resist metric
     magic_resist_metric = (
         item.stats["magic_resist"]/10+
         item.stats["magical_damage_reduction_bonus"]
@@ -70,7 +70,7 @@ def calculate_magic_resist_metric(character, item):
     return magic_resist_metric
 
 def calculate_move_speed_metric(character, item):
-    # Create the damage metric
+    # Create the move speed metric
     move_speed_metric = (
         item.stats["agility"]+item.stats["all_attributes_bonus"]+
         item.stats["additional_move_speed"]+
@@ -94,7 +94,7 @@ def optimize_equipment(character, items, weights):
     for item_type in data.type:
         # Create the constraint for the number of items of each type
         constraints.append(
-            cp.sum([x[i] for i in range(len(items)) if items[i].type == item_type]) == data.type[item_type]
+            cp.sum([x[i] for i in range(len(items)) if items[i].type == item_type]) <= data.type[item_type]
         )
 
     # Create the objective function
