@@ -13,6 +13,9 @@ def image_to_item(image):
         "class": [word for word in data.character if word in text],
         "type": next((word for word in data.type if word in text), None)
         }
+    
+    if item["class"] == []:
+        item["class"].append("All")
 
     text = text.split('\n')
     text = [x.strip() for x in text]

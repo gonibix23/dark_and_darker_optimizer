@@ -59,7 +59,7 @@ class Character(object):
         self.calculate_stats()
 
     def __str__(self):
-        return f"Strength: {self.strength}\nVigor: {self.vigor}\nAgility: {self.agility}\nDexterity: {self.dexterity}\nWill: {self.will}\nKnowledge: {self.knowledge}\nResourcfulness: {self.resourcfulness}\n\nMax Health: {self.max_health}\nHealth Recovery: {self.health_recovery}\nMove Speed: {self.move_speed}\nItem Equip Speed: {self.item_equip_speed}\nManual Dexterity: {self.manual_dexterity}\nMagic Resist: {self.magic_resist}\nPhysical Power Bonus: {self.physical_power_bonus}\nMagical Power Bonus: {self.magical_power_bonus}\nBuff Duration: {self.buff_duration}\nDebuff Duration: {self.debuff_duration}\nPersuasiveness: {self.persuasiveness}\nSpell Casting Speed: {self.spell_casting_speed}\nMemory Capacity: {self.memory_capacity}\nMemory Recovery: {self.memory_recovery}\nAction Speed: {self.action_speed}\nMagical Interaction Speed: {self.magical_interaction_speed}\nRegular Interaction Speed: {self.regular_interaction_speed}\nMagical Damage Reduction: {self.magical_damage_reduction}\nPhysical Damage Reduction: {self.physical_damage_reduction}"
+        return f"Strength: {self.strength}\nVigor: {self.vigor}\nAgility: {self.agility}\nDexterity: {self.dexterity}\nWill: {self.will}\nKnowledge: {self.knowledge}\nResourcfulness: {self.resourcfulness}\n\nMax Health: {self.max_health}\nHealth Recovery: {self.health_recovery}\nMove Speed: {self.move_speed}\nItem Equip Speed: {self.item_equip_speed}\nManual Dexterity: {self.manual_dexterity}\nMagic Resist: {self.magic_resist}\nPhysical Power Bonus: {self.physical_power_bonus}\nMagical Power Bonus: {self.magical_power_bonus}\nBuff Duration: {self.buff_duration}\nDebuff Duration: {self.debuff_duration}\nPersuasiveness: {self.persuasiveness}\nSpell Casting Speed: {self.spell_casting_speed}\nMemory Capacity: {self.memory_capacity}\nMemory Recovery: {self.memory_recovery}\nAction Speed: {self.action_speed}\nMagical Interaction Speed: {self.magical_interaction_speed}\nRegular Interaction Speed: {self.regular_interaction_speed}\nMagical Damage Reduction: {self.magical_damage_reduction}\nPhysical Damage Reduction: {self.physical_damage_reduction}\n\n{self.equipment_to_string()}"
 
     def calculate_stats(self):
         self.max_health = round((stats.max_health((self.vigor+self.all_attributes_bonus)*0.75+(self.strength+self.all_attributes_bonus)*0.25)+self.additional_max_health)*(1+(self.max_health_bonus/100)), 4)
@@ -69,7 +69,7 @@ class Character(object):
 
         self.item_equip_speed = round(stats.item_equip_speed(self.dexterity+self.all_attributes_bonus), 4)
         self.manual_dexterity = round(stats.manual_dexterity(self.dexterity+self.all_attributes_bonus), 4)
-        self.magic_resist = round(stats.magic_resistance(self.will+self.all_attributes_bonus)+self.magic_resist, 4)
+        self.magic_resist = round(stats.magic_resistance(self.will+self.all_attributes_bonus), 4)
 
         self.magical_power_bonus = round(stats.magical_power_bonus(self.will+self.all_attributes_bonus+self.magical_power)+self.magical_damage_bonus/100, 4)
         self.physical_power_bonus = round(stats.physical_power_bonus(self.strength+self.all_attributes_bonus+self.physical_power)+self.physical_damage_bonus/100, 4)
@@ -113,62 +113,43 @@ class Character(object):
 
     def get_stats(self):
         return {
-            "strength": self.strength,
-            "vigor": self.vigor,
-            "agility": self.agility,
-            "dexterity": self.dexterity,
-            "will": self.will,
-            "knowledge": self.knowledge,
-            "resourcfulness": self.resourcfulness,
-            "max_health": self.max_health,
-            "health_recovery": self.health_recovery,
-            "move_speed": self.move_speed,
-            "item_equip_speed": self.item_equip_speed,
-            "manual_dexterity": self.manual_dexterity,
-            "magic_resist": self.magic_resist,
-            "physical_power_bonus": self.physical_power_bonus,
-            "magical_power_bonus": self.magical_power_bonus,
-            "buff_duration": self.buff_duration,
-            "debuff_duration": self.debuff_duration,
+            "Strength": self.strength,
+            "Vigor": self.vigor,
+            "Agility": self.agility,
+            "Dexterity": self.dexterity,
+            "Will": self.will,
+            "Knowledge": self.knowledge,
+            "Resourcfulness": self.resourcfulness,
+            "Luck": self.luck,
+            "Max Health": self.max_health,
+            "Move Speed": f"{self.move_speed} / {round(self.move_speed/3, 2)}%",
+            "Action Speed": f"{round(self.action_speed*100, 2)}%",
+            "Physical Power Bonus": f"{round(self.physical_power_bonus*100, 2)}%",
+            "Magical Power Bonus": f"{round(self.magical_power_bonus*100, 2)}%",
+            "Spell Casting Speed": f"{round(self.spell_casting_speed*100, 2)}%",
+            "Armor Rating": self.armor,
+            "Magic Resist": self.magic_resist,
+            "Magical Damage Reduction": f"{round(self.magical_damage_reduction*100, 2)}%",
+            "Physical Damage Reduction": f"{round(self.physical_damage_reduction*100, 2)}%",
+            "Headshot Damage Reduction": f"{round(self.headshot_damage_reduction, 2)}%",
+            "Projectile Damage Reduction": f"{round(self.projectile_damage_reduction*100, 2)}%",
+            "Memory Capacity": self.memory_capacity,
+            "Memory Recovery": f"{round(self.memory_recovery*100, 2)}%",
+            "Health Recovery": f"{round(self.health_recovery*100, 2)}%",
+            "Item Equip Speed": f"{round(self.item_equip_speed*100, 2)}%",
+            "Manual Dexterity": f"{round(self.manual_dexterity*100, 2)}%",
+            "Buff Duration": f"{round(self.buff_duration*100, 2)}%",
+            "Debuff Duration": f"{round(self.debuff_duration*100, 2)}%",
             "persuasiveness": self.persuasiveness,
-            "spell_casting_speed": self.spell_casting_speed,
-            "memory_capacity": self.memory_capacity,
-            "memory_recovery": self.memory_recovery,
-            "action_speed": self.action_speed,
-            "magical_interaction_speed": self.magical_interaction_speed,
-            "regular_interaction_speed": self.regular_interaction_speed,
-            "magical_damage_reduction": self.magical_damage_reduction,
-            "physical_damage_reduction": self.physical_damage_reduction,
-            "luck": self.luck,
-            "all_attributes_bonus": self.all_attributes_bonus,
-            "max_health_bonus": self.max_health_bonus,
-            "additional_max_health": self.additional_max_health,
-            "magical_healing": self.magical_healing,
-            "weapon_damage": self.weapon_damage,
-            "true_physical_damage": self.true_physical_damage,
-            "true_magical_damage": self.true_magical_damage,
-            "additional_physical_damage": self.additional_physical_damage,
-            "additional_magical_damage": self.additional_magical_damage,
-            "armor": self.armor,
-            "magic_resist": self.magic_resist,
-            "physical_damage_reduction_bonus": self.physical_damage_reduction_bonus,
-            "magical_damage_reduction_bonus": self.magical_damage_reduction_bonus,
-            "additional_move_speed": self.additional_move_speed,
-            "move_speed_bonus": self.move_speed_bonus,
-            "additional_buff_duration": self.additional_buff_duration,
-            "additional_debuff_duration": self.additional_debuff_duration,
-            "additional_action_speed": self.additional_action_speed,
-            "additional_spell_casting_speed": self.additional_spell_casting_speed,
-            "additional_magic_interaction_speed": self.additional_magic_interaction_speed,
-            "additional_regular_interaction_speed": self.additional_regular_interaction_speed,
-            "physical_power": self.physical_power,
-            "magical_power": self.magical_power,
-            "physical_damage_bonus": self.physical_damage_bonus,
-            "magical_damage_bonus": self.magical_damage_bonus,
-            "armor_penetration": self.armor_penetration,
-            "magic_penetration": self.magic_penetration,
-            "headshot_damage_reduction": self.headshot_damage_reduction,
-            "projectile_damage_reduction": self.projectile_damage_reduction
+            "Magical Interaction Speed": f"{self.magical_interaction_speed*100}%",
+            "Regular Interaction Speed": f"{self.regular_interaction_speed*100}%",
+            "Magical Healing": self.magical_healing,
+            "True Physical Damage": self.true_physical_damage,
+            "True Magical Damage": self.true_magical_damage,
+            "Additional Physical Damage": self.additional_physical_damage,
+            "Additional Magical Damage": self.additional_magical_damage,
+            "Armor Penetration": f"{round(self.armor_penetration, 2)}%",
+            "Magic Penetration": f"{round(self.magic_penetration, 2)}%"
         }
 
     def equipment_to_string(self):

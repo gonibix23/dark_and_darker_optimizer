@@ -28,7 +28,7 @@ def main():
     st.header("Welcome to the Dark and Darker optimizer!")
 
     # Widget selectbox para seleccionar el personaje
-    character = st.selectbox("Select a character:", data.character)
+    character = create_character(st.selectbox("Select a character:", data.character))
 
     # Widget file_uploader para cargar imágenes
     uploaded_images = st.file_uploader('Upload an image:', type=['jpg', 'png', 'jpeg'], accept_multiple_files=True)
@@ -45,7 +45,7 @@ def main():
 
     # Widget button para ejecutar la función
     if st.button("Optimize"):
-        best_items = optimize_equipment(create_character(character), items, weights)
+        best_items = optimize_equipment(character, items, weights)
         
     if best_items is not None:
         st.header("Best items for the character:")
@@ -53,6 +53,18 @@ def main():
         col = st.columns(5)
         for i, item in enumerate(best_items):
             col[i % 5].image(item.image, caption=item, use_column_width=True)
+
+        for item in best_items:
+            character.equip_item(item)
+        
+        st.header("Stats of the character with equipment:")
+        col = st.columns(5)
+        i = 0
+        for stat, value in character.get_stats().items():
+            col[i % 5].write(f"{stat}: {value}")
+            i+=1
+    
+    st.write("Made with ❤️ for Dark and Darker Community by gonibix23")
 
 if __name__ == '__main__':
     main()
