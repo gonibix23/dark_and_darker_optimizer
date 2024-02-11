@@ -37,7 +37,6 @@ def image_to_item(image):
             else:
                 # If the stat is not in the list, add it with the number
                 item["stats"][data.stat[text]] = number
-    
     return Item(item["class"], item["type"], item["name"], item["stats"], image)
 
 def separate_text_and_number(string):
