@@ -1,5 +1,5 @@
 {
-    "url": "http://localhost:5173",
-    "name": "Ton Game",
-    "iconUrl": "http://localhost:5173/public/icon.png"
+    "url": "https://ton.vote",
+    "name": "TON Vote",
+    "iconUrl": "https://ton.vote/logo.png"
 }
