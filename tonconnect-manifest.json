@@ -1,0 +1,13 @@
+{
+    "url": "http://localhost:5173",
+    "name": "Ton Game",
+    "iconUrl": "http://localhost:5173/public/icon.png",
+    "description": "This is a game that uses TON Wallet SDK to connect to the user's wallet and display their balance.",
+    "version": "1.0.0",
+    "tonConnectVersion": "1.2.0",
+    "permissions": [
+      "wallet:connect",
+      "wallet:disconnect",
+      "wallet:balance"
+    ]
+  }
